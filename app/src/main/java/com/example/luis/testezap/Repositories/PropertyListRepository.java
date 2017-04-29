@@ -44,7 +44,7 @@ abstract public class PropertyListRepository extends RemoteRepository
     protected abstract void getPropertyListObject(List<Property> property);
 
 
-    protected abstract String getError(String e);
+    protected abstract void getError(String e);
 
 
     private Property getObject(JsonObject jsonObject){

@@ -1,11 +1,14 @@
 package com.example.luis.testezap.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.luis.testezap.Adapters.ListAdapter;
 import com.example.luis.testezap.Constants.ServicesConstants;
@@ -22,6 +25,7 @@ public class MainActivity extends BaseActivity  {
     private ListAdapter listAdapter;
     private List<Property> propertyList = new ArrayList<Property>();
     private MaterialDialog progress;
+    private Context activityContext = this ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +55,19 @@ public class MainActivity extends BaseActivity  {
 
 
             @Override
-            protected String getError(String e) {
-                return null;
+            protected void getError(String e)
+            {
+                new MaterialDialog.Builder(activityContext)
+                        .title(R.string.error_title)
+                        .content(R.string.error_data_connection)
+                        .positiveText(R.string.ok)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                                finish();
+                            }
+                        })
+                        .show();
             }
         };
 

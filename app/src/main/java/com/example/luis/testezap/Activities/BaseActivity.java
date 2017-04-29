@@ -2,6 +2,7 @@ package com.example.luis.testezap.Activities;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.luis.testezap.R;
+import com.example.luis.testezap.Utils.MyConnection;
 
 
 /**
@@ -41,6 +45,27 @@ abstract public class  BaseActivity extends AppCompatActivity implements Navigat
     protected void onStart() {
         super.onStart();
         upView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!MyConnection.isConnection(getApplicationContext()))
+        {
+            new MaterialDialog.Builder(this)
+                .title(R.string.error_title)
+                .content(R.string.error_connection)
+                .positiveText(R.string.ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        finish();
+                    }
+                })
+                .show();
+
+        }
     }
 
     public void upView(){

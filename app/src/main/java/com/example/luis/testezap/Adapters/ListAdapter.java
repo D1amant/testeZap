@@ -62,7 +62,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         final Property property = propertyList.get(position);
         holder.codProperty.setText(property.getCodProperty()+"");
         holder.type.setText(property.getTypeProprety());
-        holder.address.setText(property.getAddress().getAddressTxt());
+        holder.address.setText(property.getAddressTxt());
         holder.rooms.setText(context.getString(R.string.rooms)+" : "+property.getRooms());
         holder.value.setText(context.getString(R.string.price)+" : "+ Money.formatMoney(property.getPrice()));
         try {

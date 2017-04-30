@@ -1,8 +1,10 @@
 package com.example.luis.testezap.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -13,19 +15,23 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.luis.testezap.Adapters.ListAdapter;
 import com.example.luis.testezap.Constants.ServicesConstants;
 import com.example.luis.testezap.Entities.Property;
+import com.example.luis.testezap.FilterActivity;
 import com.example.luis.testezap.R;
-import com.example.luis.testezap.Repositories.PropertyListRepository;
+import com.example.luis.testezap.Repositories.Remote.PropertyListRepository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity {
 
+    private static final int REQUEST_FILTER = 1;
     private RecyclerView recyclerView;
     private ListAdapter listAdapter;
     private List<Property> propertyList = new ArrayList<Property>();
     private MaterialDialog progress;
-    private Context activityContext = this ;
+    private Context activityContext = this;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +39,10 @@ public class MainActivity extends BaseActivity  {
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        listAdapter = new ListAdapter(this ,propertyList) ;
+        listAdapter = new ListAdapter(this, propertyList);
         recyclerView.setAdapter(listAdapter);
+        swipeRefreshLayout =  (SwipeRefreshLayout) findViewById(R.id.swipeToRefresh);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.refresh_progress_1), getResources().getColor(R.color.refresh_progress_2), getResources().getColor(R.color.refresh_progress_3));
 
         progress = new MaterialDialog.Builder(this)
                 .title(R.string.progress_dialog)
@@ -44,19 +52,19 @@ public class MainActivity extends BaseActivity  {
         progress.show();
 
 
-        PropertyListRepository propertyListRepository = new PropertyListRepository() {
+        final PropertyListRepository propertyListRepository = new PropertyListRepository() {
             @Override
             protected void getPropertyListObject(List<Property> property) {
+                if(propertyList.size() > 0 ) propertyList.removeAll(propertyList);
                 propertyList.addAll(property);
                 listAdapter.notifyDataSetChanged();
                 progress.dismiss();
-
+                swipeRefreshLayout.setRefreshing(false);
             }
 
 
             @Override
-            protected void getError(String e)
-            {
+            protected void getError(String e) {
                 new MaterialDialog.Builder(activityContext)
                         .title(R.string.error_title)
                         .content(R.string.error_data_connection)
@@ -74,8 +82,14 @@ public class MainActivity extends BaseActivity  {
         propertyListRepository.setContext(getApplicationContext());
         propertyListRepository.setUrl(ServicesConstants.url);
         propertyListRepository.onGetExecute();
-    }
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                propertyListRepository.onGetExecute();
+            }
+        });
+    }
 
 
     @Override
@@ -92,14 +106,38 @@ public class MainActivity extends BaseActivity  {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        if (id == R.id.action_filter) {
+            Intent intent = new Intent(getApplicationContext(), FilterActivity.class);
+            startActivityForResult(intent, REQUEST_FILTER);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_FILTER){
+                int priceMin  = data.getIntExtra("priceMin" , 0);
+                int priceMax  = data.getIntExtra("priceMax" , 0);
+                String rooms  = data.getStringExtra("rooms");
+                String suites  = data.getStringExtra("suites");
+                String type  = data.getStringExtra("type");
+                List<Property> result = null;
+                if(!type.equals("")) {
+                 result = Property.findWithQuery(Property.class, "Select * from Property where price >= ? and price <= ? and rooms <= ? and suites <= ? and type_proprety = ?", new String[]{priceMin + "", priceMax + "", rooms, suites, type});
+                }else {
+                  result = Property.findWithQuery(Property.class , "Select * from Property where price >= ? and price <= ? and rooms <= ? and suites <= ? " , new String[]{priceMin+"" , priceMax+"" , rooms , suites } );
+                }
+                propertyList.removeAll(propertyList);
+                propertyList.addAll(result);
+             listAdapter.notifyDataSetChanged();
+
+            }
+        }
+    }
 }

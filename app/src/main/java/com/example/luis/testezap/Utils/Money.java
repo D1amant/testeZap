@@ -9,7 +9,7 @@ import java.text.NumberFormat;
 
 public class Money {
 
-    public static String  formatMoney(String val){
+    public static String  formatMoney(int val){
         BigDecimal valor = new BigDecimal (val);
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         return  nf.format (valor);

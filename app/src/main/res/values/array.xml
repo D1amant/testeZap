@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="types">
+
+        <item></item>
+        <item>Apartamento</item>
+        <item>Apartamento Padrão</item>
+        <item>Casa</item>
+        <item>Sala comercial</item>
+
+    </string-array>
+
+</resources>

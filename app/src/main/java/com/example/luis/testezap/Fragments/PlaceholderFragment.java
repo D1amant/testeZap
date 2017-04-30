@@ -53,7 +53,7 @@ public  class PlaceholderFragment extends Fragment {
         ImageView imageView = (ImageView) rootView.findViewById(R.id.img);
         try {
             Picasso.with(getContext()).load(properties.getUrlImageGalery()
-                    .get(getArguments().getInt(ARG_SECTION_NUMBER)))
+                    .getString(getArguments().getInt(ARG_SECTION_NUMBER)))
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .fit()
                     .into(imageView);

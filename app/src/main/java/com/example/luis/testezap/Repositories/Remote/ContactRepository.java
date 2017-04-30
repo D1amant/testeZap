@@ -1,4 +1,4 @@
-package com.example.luis.testezap.Repositories;
+package com.example.luis.testezap.Repositories.Remote;
 
 import com.google.gson.JsonObject;
 

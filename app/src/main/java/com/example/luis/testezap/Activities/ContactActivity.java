@@ -15,13 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.luis.testezap.Constants.ServicesConstants;
 import com.example.luis.testezap.R;
-import com.example.luis.testezap.Repositories.ContactRepository;
+import com.example.luis.testezap.Repositories.Remote.ContactRepository;
 import com.example.luis.testezap.Utils.ValidatorForm;
 
 import java.util.ArrayList;

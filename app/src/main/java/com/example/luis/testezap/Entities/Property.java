@@ -1,19 +1,31 @@
 package com.example.luis.testezap.Entities;
 
-import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
+import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by luis on 27/04/17.
  */
 
-public class Property {
+public class Property extends SugarRecord<Property>{
 
 
     private int codProperty;
     private String typeProprety;
-    private Address address;
-    private String price;
-    private String priceCondominium;
+    private String number;
+    private String CEP;
+    private String state;
+    private String city;
+    private String district;
+    private String neighbourhood;
+    private int price;
+    private int priceCondominium;
     private String rooms;
     private String suites;
     private String vacancies;
@@ -22,18 +34,21 @@ public class Property {
     private String dateUpdate;
     private Client client;
     private String urlImage;
-    private List<String> characteristics;
-    private List<String> characteristicsFeatures;
-    private List<String> urlImageGalery;
-    private  String subtypeoffer;
+    private String characteristics;
+    private String characteristicsFeatures;
+    private String urlImageGalery;
+    private String subtypeoffer;
     private String getSubtypeProperty;
     private String observation;
+
 
     public int getCodProperty() {
         return codProperty;
     }
 
-    public void setCodProperty(int codProperty) {
+    public void setCodProperty(int codProperty)
+    {
+
         this.codProperty = codProperty;
     }
 
@@ -45,19 +60,59 @@ public class Property {
         this.typeProprety = typeProprety;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getPrice() {
+    public String getCEP() {
+        return CEP;
+    }
+
+    public void setCEP(String CEP) {
+        this.CEP = CEP;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getNeighbourhood() {
+        return neighbourhood;
+    }
+
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
+    }
+
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -142,56 +197,70 @@ public class Property {
         this.getSubtypeProperty = getSubtypeProperty;
     }
 
-    public List<String> getUrlImageGalery() {
-        return urlImageGalery;
-    }
-
-    public void setUrlImageGalery(List<String> urlImageGalery) {
-        this.urlImageGalery = urlImageGalery;
-    }
-
-    public String getPriceCondominium() {
+    public int getPriceCondominium() {
         return priceCondominium;
     }
 
-    public void setPriceCondominium(String priceCondominium) {
+    public void setPriceCondominium(int priceCondominium) {
         this.priceCondominium = priceCondominium;
     }
 
-    public List<String> getCharacteristics() {
+    public String getCharacteristics() {
         return characteristics;
+    }
+
+    public void setCharacteristics(String characteristics) {
+        this.characteristics = characteristics;
+    }
+
+    public void setCharacteristicsFeatures(String characteristicsFeatures) {
+        this.characteristicsFeatures = characteristicsFeatures;
+    }
+
+    public JSONArray getUrlImageGalery()
+    {
+        try {
+            return new JSONArray(urlImageGalery);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void setUrlImageGalery(String urlImageGalery) {
+        this.urlImageGalery = urlImageGalery;
     }
 
     public String getCharacteristicsValue()
     {
         String value = "";
-        for (String val : characteristics ) {
-
-            value = value + "  , " + val;
+        try {
+             JSONArray jsonArray = new JSONArray(characteristics);
+            for (int i = 0; i < jsonArray.length(); i++ ) {
+               value = value + "  , " + jsonArray.getString(i);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         return value;
     }
 
-    public void setCharacteristics(List<String> characteristics) {
-        this.characteristics = characteristics;
-    }
 
-    public List<String> getCharacteristicsFeatures() {
-        return characteristicsFeatures;
-    }
-
-    public void setCharacteristicsFeatures(List<String> characteristicsFeatures) {
-        this.characteristicsFeatures = characteristicsFeatures;
-    }
 
     public String getcharacteristicsFeaturesValue()
     {
         String value = "";
-        for (String val : characteristicsFeatures ) {
-
-            value = value + "  , " + val;
+        try {
+            JSONArray jsonArray = new JSONArray(characteristicsFeatures);
+            for (int i = 0; i < jsonArray.length(); i++ ) {
+                value = value + "  , " + jsonArray.getString(i);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         return value;
+
     }
     public String getObservation() {
         return observation;
@@ -201,5 +270,7 @@ public class Property {
         this.observation = observation;
     }
 
-
+    public String getAddressTxt(){
+        return this.district+" , "+this.neighbourhood+" , "+this.city;
+    }
 }

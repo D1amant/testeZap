@@ -23,7 +23,7 @@ import com.example.luis.testezap.Adapters.SectionsPagerAdapter;
 import com.example.luis.testezap.Constants.ServicesConstants;
 import com.example.luis.testezap.Entities.Property;
 import com.example.luis.testezap.R;
-import com.example.luis.testezap.Repositories.PropertyRepository;
+import com.example.luis.testezap.Repositories.Remote.PropertyRepository;
 import com.example.luis.testezap.Utils.Money;
 
 import java.util.List;
@@ -155,7 +155,7 @@ public class InfoActivity extends AppCompatActivity {
         observation.setText(property.getObservation());
         characteristics.setText(property.getCharacteristicsValue());
         characteristicsFeatures.setText(property.getcharacteristicsFeaturesValue());
-        address.setText(property.getAddress().getAddressTxt());
+        address.setText(property.getAddressTxt());
         usefullArea.setText(getApplicationContext().getString(R.string.userFulArea)+": "+property.getUsefulArea());
         totalArea.setText(getApplicationContext().getString(R.string.userFulArea)+": "+property.getTotalArea());
         rooms.setText(getApplicationContext().getString(R.string.rooms)+": "+property.getRooms());

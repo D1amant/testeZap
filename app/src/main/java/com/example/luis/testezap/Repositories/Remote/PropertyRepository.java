@@ -40,7 +40,6 @@ abstract public class PropertyRepository extends RemoteRepository
 
     private Property getObject(JsonObject jsonObject){
         Property property =  new Property();
-        Address address = new Address();
         Client client = new Client();
 
         property.setCEP(jsonObject.get("Endereco").getAsJsonObject().get("CEP").getAsString());
@@ -75,7 +74,6 @@ abstract public class PropertyRepository extends RemoteRepository
 
         property.setCharacteristicsFeatures(jsonObject.get("CaracteristicasComum").getAsJsonArray().toString());
 
-        property.save();
         return property;
     }
 

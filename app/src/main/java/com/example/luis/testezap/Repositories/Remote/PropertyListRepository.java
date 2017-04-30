@@ -50,7 +50,6 @@ abstract public class PropertyListRepository extends RemoteRepository
     private Property getObject(JsonObject jsonObject){
 
         Property property =  new Property();
-        Address address = new Address();
         Client client = new Client();
 
         property.setCEP(jsonObject.get("Endereco").getAsJsonObject().get("CEP").getAsString());

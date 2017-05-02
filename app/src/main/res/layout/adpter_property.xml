@@ -4,11 +4,13 @@
                                     android:id="@+id/card_view"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="1dp"
+                                    android:layout_marginBottom="5dp"
                                     android:foreground="?attr/selectableItemBackground"
                                     card_view:cardBackgroundColor="@android:color/white"
-                                    card_view:cardCornerRadius="1dp"
-                                    card_view:cardElevation="1dp">
+                                    card_view:cardCornerRadius="2dp"
+                                    card_view:cardElevation="1dp"
+
+                                    >
 
     <LinearLayout
 
@@ -31,7 +33,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Cod. 10023"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -51,7 +52,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_gravity="center"
-                        android:src="@mipmap/ic_launcher"
+
 
                         />
 
@@ -83,7 +84,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Apartamento"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -95,8 +95,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textAlignment="center"
-                    android:text="20 % de desconto em todos nossos pacotes de treinamentos." />
-
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -111,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Área utíl : 100 m2" />
+                    />
 
 
 
@@ -121,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Área Total : 100 m2" />
+                  />
 
         </LinearLayout>
 

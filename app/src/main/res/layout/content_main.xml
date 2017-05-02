@@ -7,6 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/app_bar_main"
+        android:padding="10dp"
         tools:context="com.example.luis.testezap.Activities.MainActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -16,7 +17,8 @@
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -2,7 +2,11 @@ package com.example.luis.testezap.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.DataSetObserver;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.widget.TextView;
@@ -61,6 +67,7 @@ public class InfoActivity extends AppCompatActivity {
     private   Toolbar toolbar;
     private int codProperty;
     private Context contextActivity= this;
+    private TextView countTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,12 +94,31 @@ public class InfoActivity extends AppCompatActivity {
         PropertyRepository propertyListRepository = new PropertyRepository() {
 
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected void getPropertyObject(Property property) {
                 setValues(property);
-                mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager() , property);
+                mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), property);
+              // Do nothing
                 mViewPager.setAdapter(mSectionsPagerAdapter);
+                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        countTextView.setText((position+1)+"/"+mSectionsPagerAdapter.getCount());
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
                 progress.dismiss();
+
             }
 
             @Override
@@ -137,6 +163,7 @@ public class InfoActivity extends AppCompatActivity {
          priceCondominium = (TextView) findViewById(R.id.priceCondominium);
         mViewPager = (ViewPager) findViewById(R.id.container);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        countTextView = (TextView) findViewById(R.id.count);
     }
 
     /**
@@ -176,6 +203,7 @@ public class InfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     @Override

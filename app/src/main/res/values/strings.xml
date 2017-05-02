@@ -38,4 +38,6 @@
     <string name="priceRange">Faixa de Preço</string>
     <string name="label_type">Tipo</string>
     <string name="select_item">Selecione um item</string>
+    <string name="label_characteristics">Caracteristicas</string>
+    <string name="label_characteristics_features">Caracteristicas comuns</string>
 </resources>

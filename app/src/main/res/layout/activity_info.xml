@@ -52,7 +52,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="20dp"
                             android:gravity="center"
-                            android:text="Apartamento"
+                            android:text="@string/label_description"
                             android:textSize="18sp"
                             android:textStyle="bold"/>
 
@@ -63,7 +63,7 @@
                             android:layout_marginBottom="5dp"
 
                             android:textAlignment="center"
-                            android:text="Apertamento , padrao logalizado na zona norte de porto alegre com churrasqueira"/>
+                          />
 
 
                     <LinearLayout
@@ -87,14 +87,14 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:textStyle="bold"
-                                    android:text="Caracteristicas"/>
+                                    android:text="@string/label_characteristics"/>
 
                             <TextView
                                     android:id="@+id/characteristics"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Ar condicionado , Armário de Cozinha, Armário embutido , Escritrio"/>
+                                  />
 
                         </LinearLayout>
 
@@ -111,7 +111,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:textStyle="bold"
-                                    android:text="Caracteristicas Comuns"/>
+                                    android:text="@string/label_characteristics_features"/>
 
                             <TextView
                                     android:id="@+id/characteristicsFeatures"
@@ -119,7 +119,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
                                     android:textAlignment="center"
-                                    android:text="Ar condicionado , Armário de Cozinha,Armário embutido ,Escritrio"/>
+                                   />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -136,7 +136,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Endereço"/>
+                                android:text="@string/label_address"/>
 
 
                         <TextView
@@ -144,7 +144,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="6"
-                                android:text="Área Total : 100 m2"/>
+                               />
 
                     </LinearLayout>
 
@@ -161,7 +161,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Área utíl : 100 m2"/>
+                                android:text=""/>
 
 
                         <TextView
@@ -169,7 +169,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:text="Zona norte , Porto Alegre , RS"/>
+                                android:text=""/>
 
                     </LinearLayout>
 
@@ -187,7 +187,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Dormitorios : 100 m2"/>
+                                />
 
 
                         <TextView
@@ -195,7 +195,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:text="Suites : 100 m2"/>
+                                />
 
                     </LinearLayout>
 
@@ -213,14 +213,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Preço: 22.000.00"/>
+                                />
 
                         <TextView
                                 android:id="@+id/priceCondominium"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:text="Condominio 300"/>
+                                />
 
                     </LinearLayout>
                 </LinearLayout>

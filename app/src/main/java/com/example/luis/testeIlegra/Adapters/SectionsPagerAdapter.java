@@ -1,0 +1,44 @@
+package com.example.luis.testeIlegra.Adapters;
+
+/**
+ * Created by luis on 27/04/17.
+ */
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.TextView;
+
+import com.example.luis.testeIlegra.Entities.Property;
+import com.example.luis.testeIlegra.Fragments.PlaceholderFragment;
+
+/**
+ * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+ * one of the sections/tabs/pages.
+ */
+ public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    Property property;
+     TextView countTextView;
+
+    public SectionsPagerAdapter(FragmentManager fm , Property property )
+    {
+        super(fm);
+        this.property = property;
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        // getItem is called to instantiate the fragment for the given page.
+        // Return a PlaceholderFragment (defined as a static inner class below).
+
+
+        return PlaceholderFragment.newInstance(position + 1 , property);
+    }
+
+    @Override
+    public int getCount() {
+        //onGetCurrentItem(getItemPosition(this));
+        return 3;
+    }
+
+}

@@ -8,7 +8,7 @@
         android:padding="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_main_contact"
-        tools:context="com.example.luis.testezap.Activities.ContactActivity">
+        tools:context="com.example.luis.testeIlegra.Activities.ContactActivity">
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
